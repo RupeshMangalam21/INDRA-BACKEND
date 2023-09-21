@@ -11,7 +11,7 @@ async function startServer() {
     const db = await connectToDatabase(); // Establish the database connection
 
     // Define routes and application logic here!!! (UJALA)
-
+    
     app.get('/', (req, res) => {
       res.send('Hello, world!');
     });
