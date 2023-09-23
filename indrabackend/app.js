@@ -14,11 +14,11 @@ async function startServer() {
     app.use(express.json()); // Enable JSON request body parsing
 
     // Mount location routes
-    const locationRoutes = require('./routes/locationRoutes');
+    const locationRoutes = require('./routes/locationsRoutes');
     app.use('/api/locations', locationRoutes);
 
     // Mount prediction routes
-    const predictionRoutes = require('./routes/predictionRoutes');
+    const predictionRoutes = require('./routes/predictionsRoutes');
     app.use('/api/predictions', predictionRoutes);
 
     // Start the Express server
