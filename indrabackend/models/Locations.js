@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 // Define the Location schema
-const locationSchema = new mongoose.Schema({
+const locationsSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -29,6 +29,6 @@ const locationSchema = new mongoose.Schema({
 });
 
 // Create the Location model
-const Location = mongoose.model('Location', locationSchema);
+const Locations = mongoose.model('Locations', locationsSchema);
 
-module.exports = Location;
+module.exports = Locations;
