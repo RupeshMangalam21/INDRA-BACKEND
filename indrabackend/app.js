@@ -1,29 +1,34 @@
 const express = require('express');
-const { connectToDatabase } = require('./db'); // Import the database connection function
-const Location = require('./models/Locations'); // Import the Location model
-const Prediction = require('./models/Predictions'); // Import the Prediction model
+const { connectToDatabase } = require('./db');
+const locationRoutes = require('./routes/locationsRoutes');
+const predictionRoutes = require('./routes/predictionsRoutes');
+const cors = require('cors'); // Import the CORS middleware
 
 const app = express();
-
 const port = process.env.PORT || 3000;
 
 async function startServer() {
   try {
-    const db = await connectToDatabase(); // Establish the database connection
+    await connectToDatabase();
     
-    app.use(express.json()); // Enable JSON request body parsing
+    // Middleware
+    app.use(cors()); // Add the CORS middleware
+    app.use(express.json());
 
-    // Mount location routes
-    const locationRoutes = require('./routes/locationsRoutes');
+    // Routes
     app.use('/api/locations', locationRoutes);
-
-    // Mount prediction routes
-    const predictionRoutes = require('./routes/predictionsRoutes');
     app.use('/api/predictions', predictionRoutes);
 
-    // Start the Express server
-    app.listen(port, () => {
+    const server = app.listen(port, () => {
       console.log(`Server is running on port ${port}`);
+    });
+
+    // Graceful shutdown
+    process.on('SIGTERM', () => {
+      console.log('Received SIGTERM. Closing server gracefully.');
+      server.close(() => {
+        console.log('Server closed.');
+      });
     });
   } catch (error) {
     console.error('Error starting the server:', error);
