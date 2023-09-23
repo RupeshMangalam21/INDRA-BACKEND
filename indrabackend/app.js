@@ -12,7 +12,9 @@ async function startServer() {
     await connectToDatabase();
     
     // Middleware
-    app.use(cors()); // Add the CORS middleware
+    app.use(cors({
+      origin: 'https://vigilant-waddle-jwgpxp65vrrc59p5-3000.app.github.dev',
+    })); // Add the CORS middleware
     app.use(express.json());
 
     // Routes
