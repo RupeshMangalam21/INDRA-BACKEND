@@ -1,5 +1,5 @@
 const express = require('express');
-const Prediction = require('../models/predictions'); // Import the Prediction model
+const Prediction = require('../models/Predictions'); // Import the Prediction model
 
 const router = express.Router();
 
