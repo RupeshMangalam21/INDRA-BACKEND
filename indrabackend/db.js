@@ -6,7 +6,7 @@ const uri = process.env.MONGODB_URI; // Use an environment variable for the URI
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 async function connectToDatabase() {
-  let retries = 3; // Number of retries
+  let retries = 6; // Number of retries
   while (retries > 0) {
     try {
       await client.connect();
