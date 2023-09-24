@@ -16,8 +16,8 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Get all predictions
-router.get('/', async (req, res) => {
+//Get all predictions
+router.get('/all', async (req, res) => {
   try {
     const predictions = await Prediction.find();
     res.json(predictions);
@@ -28,9 +28,10 @@ router.get('/', async (req, res) => {
 });
 
 // Get a prediction by ID
-router.get('/:id', async (req, res) => {
+router.get('/', async (req, res) => {
+  const { selectedLocation } = req.query;
   try {
-    const prediction = await Prediction.findById(req.params.id);
+    const prediction = await Prediction.find({location:selectedLocation});
     if (!prediction) {
       return res.status(404).json({ error: 'Prediction not found' });
     }
